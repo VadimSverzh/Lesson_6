@@ -4,16 +4,14 @@ import Accounts.MainAccount;
 
 public class Loader {
     public static void main(String[] args) {
-        CardAccount account1 = new CardAccount(1000);
-        account1.put(300.5);
+        DepositAccount account1 = new DepositAccount("1000");
+        account1.take("300.5");
+        account1.take("100.1");
+        account1.take("200.951");
         account1.getAmount();
-        MainAccount account = new MainAccount(100.1);
-        account.getAmount();
-        account.put(100.2);
-        account.getAmount();
-        account.take(100.1);
-        account.getAmount();
-        account1.take(10.5);
+        account1.put("10.5");
+        account1.getAmount();
+        account1.put("1005");
         account1.getAmount();
     }
 }
