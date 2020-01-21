@@ -1,17 +1,19 @@
 package Accounts;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CardAccount extends MainAccount {
+
+    private BigDecimal amount;
 
     public CardAccount (String amount) {
         super (amount);
     }
 
     @Override
-    public void take(String amount) {
-        BigDecimal thisAmount = new BigDecimal(this.amount);
-        BigDecimal takeAmount = new BigDecimal(amount).multiply(BigDecimal.valueOf(1.01));
-        this.amount = thisAmount.subtract(takeAmount).toString();
+    public void take(BigDecimal amount) {
+        BigDecimal takeAmount = amount.multiply(BigDecimal.valueOf(1.01)).setScale(2, RoundingMode.CEILING);
+        super.take(takeAmount);
     }
 }
