@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 public class DepositAccount extends MainAccount {
 
-    private BigDecimal amount;
     private LocalDateTime takeDate;
 
     public DepositAccount (String amount){
@@ -17,9 +16,8 @@ public class DepositAccount extends MainAccount {
     @Override
     public void take(BigDecimal amount) {
         LocalDateTime currentDate = LocalDateTime.now();
-        BigDecimal takeAmount = amount;
         if (currentDate.isAfter(takeDate)) {
-            super.take(takeAmount);
+            super.take(amount);
         }
         else System.out.println("Вы не можете взять деньги, пока не пройдёт месяц!");
     }

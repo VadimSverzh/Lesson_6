@@ -5,8 +5,6 @@ import java.math.RoundingMode;
 
 public class CardAccount extends MainAccount {
 
-    private BigDecimal amount;
-
     public CardAccount (String amount) {
         super (amount);
     }
