@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class MainAccount {
 
     private BigDecimal amount;
-    public final static String sumCheck = "[\\d]+.?[\\d]{0,2}";
+    private final static String sumCheck = "[\\d]+.?[\\d]{0,2}";
 
     public MainAccount (String amount) {
            if (amount.matches(sumCheck)) {

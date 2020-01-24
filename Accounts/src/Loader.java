@@ -8,7 +8,7 @@ public class Loader {
 
     public static void main(String[] args) {
 
-        CardAccount account1 = new CardAccount("1000");
+        DepositAccount account1 = new DepositAccount("1000");
         BigDecimal sum1 = new BigDecimal("1000");
         account1.take(sum1);
 
