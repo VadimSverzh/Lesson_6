@@ -1,5 +1,7 @@
+import java.math.BigInteger;
+
 public interface Employee
 {
-    public double getMonthSalary();
+    BigInteger getMonthSalary();
 }
 

@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -5,65 +6,96 @@ import java.util.List;
 public class Company {
 
     private ArrayList<Employee> employees = new ArrayList<>();
-    private static final double min = 100000.;
-    private static final double max = 20000000.;
-    private int employeeAmount;
+    private static BigInteger income = BigInteger.valueOf(0);
+    private static final BigInteger companyPlan = BigInteger.valueOf(10000000);
+    private int count;
 
     public Company(int operators, int managers, int topManagers) {
         hireAll(operators, managers, topManagers);
-        employeeAmount = operators + managers + topManagers;
     }
 
     public void hire(Position position) {
         if (position == Position.OPERATOR) employees.add(new Operator());
         else if (position == Position.MANAGER) employees.add(new Manager());
         else employees.add(new TopManager());
-        employeeAmount = employeeAmount++;
+        count++;
     }
 
     public void hireAll(int operators, int managers, int topManagers) {
 
-        for (int i = 1; i <= operators; i++) {
+        for (int i = 0; i < operators; i++) {
             employees.add(new Operator());
+            sumIncome(count);
+            count++;
         }
 
-        for (int j = 1; j <= managers; j++) {
+        for (int j = 0; j < managers; j++) {
             employees.add(new Manager());
+            sumIncome(count);
+            count++;
         }
 
-        for (int k = 1; k <= topManagers; k++) {
+        for (int k = 0; k < topManagers; k++) {
             employees.add(new TopManager());
+            sumIncome(count);
+            count++;
         }
-        employeeAmount = employeeAmount + operators + managers + topManagers;
     }
 
-    public static double getIncome() {
-        return rnd(min, max);
+    public static BigInteger getIncome() {
+        return income;
     }
 
-    public void fire(int count) {
-        if (count <= employees.size()) {
-            for (int o = 1; o <= count; o++)
-            employees.remove(o);
+    public static BigInteger getCompanyPlan() {
+        return companyPlan;
+    }
+
+    public void fire(int amount) {
+        if (amount <= employees.size()) {
+            for (int o = 0; o < count; o++) {
+                employees.remove(o);
+                count = --count;
+            }
         }
-        else System.out.println("Введенноё количество превышает количество сотрудников компании!");
+        else System.out.println("Введенное количество превышает количество сотрудников компании!");
     }
 
-    public static double rnd(double min, double max) {
-        max -= min;
-        return (Math.random() * ++max) + min;
-    }
-
-    public List<Employee> getTopSalaryStaff (int count){
-        ArrayList<Employee>topSalary = new ArrayList<>();
-        Comparator<Employee> top = new EmployeeComparator();
+    public List<Employee> getTopSalaryStaff (int count) {
+        if (count > employees.size()) {
+        count = employees.size();
+        }
+        Comparator<Employee> top = new EmployeeComparatorTop();
         employees.sort(top);
-        for (int q = 1; q <= count; q++)
+        ArrayList<Employee> topSalary = new ArrayList<>();
+        for (int q = 0; q < count; q++)
         {
-         topSalary.add(employees.get(q));
-            System.out.println(employees.get(q).getMonthSalary());
+            topSalary.add(employees.get(q));
         }
-        topSalary.sort(top);
         return topSalary;
+    }
+
+    public List<Employee> getLowSalaryStaff (int count) {
+        if (count > employees.size()) {
+            count = employees.size();
+        }
+        Comparator<Employee> low = new EmployeeComparatorLow();
+        employees.sort(low);
+        ArrayList<Employee> lowSalary = new ArrayList<>();
+        for (int q = 0; q < count; q++)
+        {
+            lowSalary.add(employees.get(q));
+        }
+        return lowSalary;
+    }
+
+    private void sumIncome(int sum){
+        if (employees.get(sum) instanceof IncomeRecievable) {
+            IncomeRecievable incomeRecievable = (IncomeRecievable) (employees.get(sum));
+            income = income.add(incomeRecievable.getEmployeeIncome());
+        }
+    }
+
+    public int getEmployeeAmount(){
+        return count;
     }
 }
