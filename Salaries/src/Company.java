@@ -7,37 +7,57 @@ public class Company {
 
     private ArrayList<Employee> employees = new ArrayList<>();
     private static BigInteger income = BigInteger.valueOf(0);
-    private static final BigInteger companyPlan = BigInteger.valueOf(10000000);
+    private static final BigInteger companyPlan = BigInteger.valueOf(100000000);
     private int count;
+    private int operators;
+    private int managers;
+    private int topManagers;
 
     public Company(int operators, int managers, int topManagers) {
         hireAll(operators, managers, topManagers);
     }
 
     public void hire(Position position) {
-        if (position == Position.OPERATOR) employees.add(new Operator());
-        else if (position == Position.MANAGER) employees.add(new Manager());
-        else employees.add(new TopManager());
-        count++;
+        if (position == Position.OPERATOR) {
+            employees.add(new Operator(Company.this));
+            sumIncome(count);
+            operators++;
+            count++;
+        }
+        else if (position == Position.MANAGER) {
+            employees.add(new Manager(Company.this));
+            sumIncome(count);
+            managers++;
+            count++;
+        }
+        else if (position == Position.TOPMANAGER){
+            employees.add(new TopManager(Company.this));
+            sumIncome(count);
+            topManagers++;
+            count++;
+        }
     }
 
     public void hireAll(int operators, int managers, int topManagers) {
 
         for (int i = 0; i < operators; i++) {
-            employees.add(new Operator());
+            employees.add(new Operator(Company.this));
             sumIncome(count);
+            this.operators++;
             count++;
         }
 
         for (int j = 0; j < managers; j++) {
-            employees.add(new Manager());
+            employees.add(new Manager(Company.this));
             sumIncome(count);
+            this.managers++;
             count++;
         }
 
         for (int k = 0; k < topManagers; k++) {
-            employees.add(new TopManager());
+            employees.add(new TopManager(Company.this));
             sumIncome(count);
+            this.topManagers++;
             count++;
         }
     }
@@ -51,11 +71,33 @@ public class Company {
     }
 
     public void fire(int amount) {
+        employees.sort(new EmployeeComparatorLow());
+        int fireRate = amount * 100 / count;
+        int operatorsToFire = operators * fireRate / 100;
+        int managersToFire = managers * fireRate / 100;
+        int topManagersToFire = topManagers * fireRate / 100;
+
         if (amount <= employees.size()) {
-            for (int o = 0; o < count; o++) {
-                employees.remove(o);
-                count = --count;
-            }
+                for (int o = 0; o < employees.size(); o++) {
+                    if (employees.get(o).proffession().equals(Position.OPERATOR) & operatorsToFire > 0) {
+                        employees.remove(o);
+                        operatorsToFire--;
+                        count--;
+                        o--;
+                    }
+                    else if (employees.get(o).proffession().equals(Position.MANAGER) & managersToFire > 0) {
+                        employees.remove(o);
+                        managersToFire--;
+                        count--;
+                        o--;
+                    }
+                    else if(employees.get(o).proffession().equals(Position.TOPMANAGER) & topManagersToFire > 0) {
+                        employees.remove(o);
+                        topManagersToFire--;
+                        count--;
+                        o--;
+                    }
+                }
         }
         else System.out.println("Введенное количество превышает количество сотрудников компании!");
     }

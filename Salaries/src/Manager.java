@@ -2,18 +2,33 @@ import java.math.BigInteger;
 
 public class Manager implements Employee, IncomeRecievable {
 
-    private final int minManagerIncome = 100000000;
-    private final int maxManagerIncome = 200000000;
+    private final int minManagerIncome = 100000;
+    private final int maxManagerIncome = 200000;
     private final BigInteger managerIncome = BigInteger.valueOf(rnd(minManagerIncome, maxManagerIncome));
 
-    private final int minManagerFix = 3000000;
-    private final int maxManagerFix = 7000000;
+    private final int minManagerFix = 60000;
+    private final int maxManagerFix = 70000;
     private final BigInteger fix = BigInteger.valueOf(rnd(minManagerFix, maxManagerFix));
     private final BigInteger percent = BigInteger.valueOf(5);
+
+    private Company company;
+
+    public Manager (Company company) {
+        this.company = company;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
 
     @Override
     public BigInteger getMonthSalary() {
         return fix.add(managerIncome.multiply(percent.divide(BigInteger.valueOf(100))));
+    }
+
+    @Override
+    public Enum proffession() {
+        return Position.MANAGER;
     }
 
     private int rnd (int min, int max) {
