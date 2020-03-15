@@ -6,8 +6,8 @@ import java.util.List;
 public class Company {
 
     private ArrayList<Employee> employees = new ArrayList<>();
-    private static BigInteger income = BigInteger.valueOf(0);
-    private static final BigInteger companyPlan = BigInteger.valueOf(100000000);
+    private BigInteger income = BigInteger.valueOf(0);
+    private final BigInteger companyPlan = BigInteger.valueOf(100000000);
     private int count;
     private int operators;
     private int managers;
@@ -62,11 +62,11 @@ public class Company {
         }
     }
 
-    public static BigInteger getIncome() {
+    public BigInteger getIncome() {
         return income;
     }
 
-    public static BigInteger getCompanyPlan() {
+    public BigInteger getCompanyPlan() {
         return companyPlan;
     }
 

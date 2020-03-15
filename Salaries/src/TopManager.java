@@ -17,7 +17,7 @@ public class TopManager implements Employee {
     }
 
     public BigInteger getMonthSalary() {
-            if (Company.getIncome().compareTo(Company.getCompanyPlan()) > 0){
+            if (getCompany().getIncome().compareTo(getCompany().getCompanyPlan()) > 0){
             return fix.add((fix.multiply(percent.divide(BigInteger.valueOf(100)))));
             }
             else return fix;

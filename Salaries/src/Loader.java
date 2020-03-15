@@ -3,6 +3,9 @@ public class Loader {
         Company company = new Company(180,80,10);
         System.out.printf("%,d руб.%n", company.getIncome());
 
+        Company company2 = new Company(180, 80, 10);
+        System.out.printf("%,d руб.%n", company2.getIncome());
+
         System.out.println("Рейтинг высоких зарплат");
         for (Employee top: company.getTopSalaryStaff(15))
         {
