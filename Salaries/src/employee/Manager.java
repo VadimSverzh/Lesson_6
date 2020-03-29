@@ -1,3 +1,7 @@
+package employee;
+
+import company.Company;
+
 import java.math.BigInteger;
 
 public class Manager implements Employee, IncomeRecievable {
@@ -15,6 +19,7 @@ public class Manager implements Employee, IncomeRecievable {
 
     public Manager (Company company) {
         this.company = company;
+        this.company.setIncome(getEmployeeIncome());
     }
 
     public Company getCompany() {
@@ -27,7 +32,7 @@ public class Manager implements Employee, IncomeRecievable {
     }
 
     @Override
-    public Enum proffession() {
+    public Enum profession() {
         return Position.MANAGER;
     }
 

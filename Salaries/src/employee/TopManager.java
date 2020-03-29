@@ -1,3 +1,7 @@
+package employee;
+
+import company.Company;
+
 import java.math.BigInteger;
 
 public class TopManager implements Employee {
@@ -24,7 +28,7 @@ public class TopManager implements Employee {
     }
 
     @Override
-    public Enum proffession() {
+    public Enum profession() {
         return Position.TOPMANAGER;
     }
 
