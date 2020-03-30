@@ -27,11 +27,6 @@ public class TopManager implements Employee {
             else return fix;
     }
 
-    @Override
-    public Enum profession() {
-        return Position.TOPMANAGER;
-    }
-
     private int rnd (int min, int max) {
         max -= min;
         return (int) (Math.random() *  ++max) + min;

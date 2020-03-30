@@ -6,7 +6,6 @@ import employee.TopManager;
 import company.Company;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Loader {
@@ -47,29 +46,14 @@ public class Loader {
         {
             System.out.printf((company.getLowSalaryStaff(30).indexOf(low) + 1) + ". " + "%,d руб.%n", low.getMonthSalary());
         }
+
+        for (int j = 0; j < company.getEmployees().size(); j++){
+            company.fire(j, Operator.class,90);
+            company.fire(j, Manager.class, 40);
+            company.fire(j, TopManager.class,5);
+        }
+
         System.out.println();
-
-        int operatorsToFire = 0;
-        int managersToFire = 0;
-        int topManagersToFire = 0;
-        Iterator<Employee>employeeIterator = company.getEmployees().iterator();
-            while (employeeIterator.hasNext()) {
-                Employee newEmployee = employeeIterator.next();
-                if (newEmployee instanceof Operator & operatorsToFire < 90) {
-                    employeeIterator.remove();
-                    operatorsToFire++;
-                }
-                if (newEmployee instanceof Manager & managersToFire < 40) {
-                    employeeIterator.remove();
-                    managersToFire++;
-                }
-                if (newEmployee instanceof TopManager & topManagersToFire < 5) {
-                    employeeIterator.remove();
-                    topManagersToFire++;
-                }
-            }
-
-
         System.out.println("После увольнения осталось " + company.getEmployees().size() + " сотрудников");
         System.out.println();
 
@@ -79,6 +63,7 @@ public class Loader {
             System.out.printf((company.getTopSalaryStaff(15).indexOf(top) + 1) + ". " + "%,d руб.%n", top.getMonthSalary());
         }
 
+        System.out.println();
         System.out.println("Рейтинг низких зарплат после увольнений");
         for (Employee low: company.getLowSalaryStaff(30))
         {

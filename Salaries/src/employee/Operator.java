@@ -24,11 +24,6 @@ public class Operator implements Employee {
         return fix;
     }
 
-    @Override
-    public Enum profession() {
-        return Position.OPERATOR;
-    }
-
     private int rnd (int min, int max) {
         max -= min;
         return (int) (Math.random() *  ++max) + min;

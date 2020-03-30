@@ -19,21 +19,12 @@ public class Manager implements Employee, IncomeRecievable {
 
     public Manager (Company company) {
         this.company = company;
-        this.company.setIncome(getEmployeeIncome());
-    }
-
-    public Company getCompany() {
-        return company;
+        this.company.addIncome(getEmployeeIncome());
     }
 
     @Override
     public BigInteger getMonthSalary() {
         return fix.add(managerIncome.multiply(percent.divide(BigInteger.valueOf(100))));
-    }
-
-    @Override
-    public Enum profession() {
-        return Position.MANAGER;
     }
 
     private int rnd (int min, int max) {
