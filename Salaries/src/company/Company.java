@@ -47,31 +47,25 @@ public class Company {
     }
 
     public List<Employee> getTopSalaryStaff (int count) {
-        countCheck(count);
         Comparator<Employee> top = new EmployeeComparatorTop();
         employees.sort(top);
-        return addEmployees(count);
+        return addEmployees(correctQuerryCount(count));
     }
 
     public List<Employee> getLowSalaryStaff (int count) {
-        countCheck(count);
         Comparator<Employee> low = new EmployeeComparatorTop().reversed();
         employees.sort(low);
-        return addEmployees(count);
+        return addEmployees(correctQuerryCount(count));
     }
 
-    private void countCheck(int count) {
+    private int correctQuerryCount(int count) {
         if (count > employees.size()) {
             count = employees.size();
         }
+        return count;
     }
 
-    private ArrayList<Employee>addEmployees(int count){
-        ArrayList<Employee> sortBy = new ArrayList<>();
-        for (int q = 0; q < count; q++)
-        {
-            sortBy.add(employees.get(q));
-        }
-        return sortBy;
+    private List<Employee>addEmployees(int count){
+        return employees.subList(0, count);
     }
 }

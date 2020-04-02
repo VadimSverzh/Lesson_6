@@ -35,16 +35,18 @@ public class Loader {
         System.out.println();
 
         System.out.println("Рейтинг высоких зарплат");
-        for (Employee top: company.getTopSalaryStaff(15))
+        List<Employee>large = company.getTopSalaryStaff(15);
+        for (Employee top: large)
         {
-            System.out.printf((company.getTopSalaryStaff(15).indexOf(top) + 1) + ". " + "%,d руб.%n", top.getMonthSalary());
+            System.out.printf((large.indexOf(top) + 1) + ". " + "%,d руб.%n", top.getMonthSalary());
         }
         System.out.println();
 
         System.out.println("Рейтинг низких зарплат");
-        for (Employee low: company.getLowSalaryStaff(30))
+        List<Employee>small = company.getLowSalaryStaff(2000);
+        for (Employee low: small)
         {
-            System.out.printf((company.getLowSalaryStaff(30).indexOf(low) + 1) + ". " + "%,d руб.%n", low.getMonthSalary());
+            System.out.printf((small.indexOf(low) + 1) + ". " + "%,d руб.%n", low.getMonthSalary());
         }
 
         for (int j = 0; j < company.getEmployees().size(); j++){
@@ -58,16 +60,18 @@ public class Loader {
         System.out.println();
 
         System.out.println("Рейтинг высоких зарплат после увольнений");
-        for (Employee top: company.getTopSalaryStaff(15))
+        large = company.getTopSalaryStaff(15);
+        for (Employee top: large)
         {
-            System.out.printf((company.getTopSalaryStaff(15).indexOf(top) + 1) + ". " + "%,d руб.%n", top.getMonthSalary());
+            System.out.printf((large.indexOf(top) + 1) + ". " + "%,d руб.%n", top.getMonthSalary());
         }
-
         System.out.println();
+
         System.out.println("Рейтинг низких зарплат после увольнений");
-        for (Employee low: company.getLowSalaryStaff(30))
+        small = company.getLowSalaryStaff(2000);
+        for (Employee low: small)
         {
-            System.out.printf((company.getLowSalaryStaff(30).indexOf(low) + 1) + ". " + "%,d руб.%n", low.getMonthSalary());
+            System.out.printf((small.indexOf(low) + 1) + ". " + "%,d руб.%n", low.getMonthSalary());
         }
     }
 }
